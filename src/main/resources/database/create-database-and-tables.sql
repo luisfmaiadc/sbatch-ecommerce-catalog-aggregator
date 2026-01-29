@@ -5,14 +5,13 @@ CREATE TABLE TbEletronico (
     id INT UNSIGNED PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     preco DECIMAL(10, 2) NOT NULL,
-    taxa DECIMAL(3,2) NOT NULL,
     dataCriacao DATETIME NOT NULL
 );
 
 CREATE TABLE TbLivro (
     id INT UNSIGNED PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
-    isbn VARCHAR(16) NOT NULL,
+    isbn VARCHAR(17) NOT NULL,
     preco DECIMAL(10, 2) NOT NULL,
     dataCriacao DATETIME NOT NULL
 );
