@@ -17,7 +17,7 @@ public class BookItemProcessor implements ItemProcessor<Livro, Livro> {
     @Override
     public Livro process(Livro item) {
         if (item.getIsbn() == null || item.getIsbn().length() != 13 || !item.getIsbn().matches("\\d+")) {
-            item.setInvalidBook(false);
+            item.setInvalidBook(true);
             qtdLivrosInvalidos++;
             return item;
         }
@@ -26,7 +26,6 @@ public class BookItemProcessor implements ItemProcessor<Livro, Livro> {
         String isbnFormatado = String.format("%s-%s-%s-%s-%s",
                 isbn.substring(0, 3), isbn.substring(3, 5), isbn.substring(5, 10), isbn.substring(10, 12), isbn.charAt(12));
         item.setIsbn(isbnFormatado);
-        item.setInvalidBook(true);
         return item;
     }
     

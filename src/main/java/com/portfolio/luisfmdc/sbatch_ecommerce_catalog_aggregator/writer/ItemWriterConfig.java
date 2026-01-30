@@ -35,7 +35,7 @@ public class ItemWriterConfig {
     @Bean
     public ClassifierCompositeItemWriter<Livro> bookCompositeWriter(ItemWriter<Livro> bookItemWriter, FlatFileItemWriter<Livro> bookFlatFileItemWriter) {
         ClassifierCompositeItemWriter<Livro> writer = new ClassifierCompositeItemWriter<>();
-        writer.setClassifier(livro -> livro.isInvalidBook() ? bookItemWriter : bookFlatFileItemWriter);
+        writer.setClassifier(livro -> !livro.isInvalidBook() ? bookItemWriter : bookFlatFileItemWriter);
         return writer;
     }
 
@@ -52,7 +52,7 @@ public class ItemWriterConfig {
     public FlatFileItemWriter<Livro> bookFlatFileItemWriter() {
         return new FlatFileItemWriterBuilder<Livro>()
                 .name("bookFlatFileItemWriter")
-                .resource(new FileSystemResource("./output/invalid_isbn_books.txt"))
+                .resource(new FileSystemResource("src/main/resources/output/invalid_isbn_books.txt"))
                 .delimited()
                 .delimiter(",")
                 .names("id", "isbn")
